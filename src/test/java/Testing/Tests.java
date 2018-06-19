@@ -31,22 +31,27 @@ public class Tests {
         homeSteps.GeoFieldDisplayed();
         homeSteps.clearGeoField();
         homeSteps.printText("Лондон");
+        homeSteps.linkTitleLondonDisplayed();
+        homeSteps.londonText();
         homeSteps.click();
         homeSteps.geoLinkEnabled();
         homeSteps.containsText();
         homeSteps.clickYet();
-        homeSteps.getText1();
+        String text1 = homeSteps.getText1();
         homeSteps.geoLinkEnabled();
         homeSteps.clickGeoLink();
         homeSteps.GeoFieldDisplayed();
         homeSteps.clearGeoField();
         homeSteps.printText2("Париж");
-        homeSteps.clickParis();
+        homeSteps.linkTitleParisDisplayed();
+        homeSteps.parisText();
+        homeSteps.click();
+        /**homeSteps.clickParis();**/
         homeSteps.geoLinkEnabled();
         homeSteps.containsText2();
         homeSteps.clickYet();
-        homeSteps.getText2();
-        homeSteps.Equals();
+        String text2 = homeSteps.getText2();
+        homeSteps.Equals(text1, text2);
 
     }
 

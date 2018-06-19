@@ -15,14 +15,16 @@ public class HomePage {
     private WebElement geoLink;
     @FindBy(css = "input[id=city__front-input]")
     private WebElement geoName;
-    @FindBy(xpath = "//div[4]/div/ul/li[1]/div[1]")
+    @FindBy(css  = "[class='b-autocomplete-item__reg']")
     private WebElement linkTitle;
+    @FindBy(xpath  = "//*[@class='b-autocomplete-item__reg'][contains(text(), 'Лондон')]")
+    private WebElement linkTitleLondon;
+    @FindBy(xpath = "//*[@class='b-autocomplete-item__reg'][contains(text(), 'Париж')]")
+    private WebElement linkTitleParis;
     @FindBy(css = "[class='home-tabs__more']")
     private WebElement  yet;
     @FindBy(css = "[data-statlog='tabs.more']")
     private WebElement yetLink;
-    @FindBy(xpath = "//div[5]/div/ul/li[1]")
-    private WebElement linkTitleParis;
 
     public HomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -45,6 +47,24 @@ public class HomePage {
         return geoName.isDisplayed();
     }
 
+    /**
+     * This lin is present
+     * @return
+     */
+    public boolean isLinkTitleParisDisplayed() {
+        return linkTitleParis.isDisplayed();
+    }
+
+    public boolean isLinkTitleLondonDisplayed() {
+        return linkTitleLondon.isDisplayed();
+    }
+
+    public String londonText() {
+        return linkTitle.getText();
+    }
+    public String parisText() {
+        return linkTitle.getText();
+    }
     public void geoFieldClear() {
         geoName.clear();
     }
@@ -54,14 +74,13 @@ public class HomePage {
     }
 
     public String yetText1() {
-        System.out.println(yet.getText());
         return yet.getText();
     }
 
     public String yetText2() {
-        System.out.println(yet.getText());
         return yet.getText();
     }
+
     public void clickLink() {
         linkTitle.click();
 

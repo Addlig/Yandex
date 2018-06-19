@@ -4,13 +4,12 @@ import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
-import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class BaseSteps {
 
     HomePage homePage;
-    private String texte;
+
 
     public BaseSteps(WebDriver driver) {
         this.homePage = new HomePage(driver);
@@ -38,6 +37,18 @@ public class BaseSteps {
                 homePage.isGeoFieldDisplayed());
     }
 
+    @Step("Поле город должна быть доступна")
+    public void linkTitleParisDisplayed() {
+        assertTrue("GeoFieldDisplayed не доступна",
+                homePage.isLinkTitleParisDisplayed());
+    }
+
+    @Step("Поле город должна быть доступна")
+    public void linkTitleLondonDisplayed() {
+        assertTrue("GeoFieldDisplayed не доступна",
+                homePage.isLinkTitleLondonDisplayed());
+    }
+
     @Step("Очищаем поле города")
     public void clearGeoField() {
         homePage.geoFieldClear();
@@ -47,53 +58,69 @@ public class BaseSteps {
     public void printText(String text) {
         homePage.printText(text);
     }
+
     @Step("Вводятся Париж")
     public void printText2(String text2) {
         homePage.printText2(text2);
     }
+
     @Step("Click")
     public void click() {
         homePage.clickLink();
     }
+
     @Step("ClickParis")
     public void clickParis() {
         homePage.clickLinkParis();
     }
+
     @Step("ClickYet")
     public void clickYet() {
         homePage.clickYetLink();
     }
+
     @Step("GetText1")
-    public void getText1() {
-        homePage.yetText1();
+    public String getText1() {
+       return homePage.yetText1();
     }
 
     @Step("GetText2")
-    public void getText2() {
-        homePage.yetText2();
-    }
-    @Step("Проверка на Трамп")
-    public void Equals() {
-        assertEquals(homePage.yetText1(), homePage.yetText2());
-        System.out.println("Верно");
+    public String getText2() {
+        return homePage.yetText2();
     }
 
     @Step("Проверка на Трамп")
+    public void Equals(String expected, String actual) {
+            assertEquals("неавава ", expected, actual);
+            System.out.println("Верно");
+    }
+
+    @Step("Проверка на Лондон")
     public void containsText() {
         assertTrue(homePage.getTextGeoLink().contains("Лондон"));
-        System.out.println("Лондон");
+        System.out.println("Содержит Лондон");
     }
+
     @Step("Проверка на Париж")
     public void containsText2() {
-        assertTrue(homePage.getTextGeoLink2().contains("Париж"));
-        System.out.println("Париж");
+        assertTrue(homePage.getTextGeoLink().contains("Париж"));
+        System.out.println("Содержит Париж");
+    }
+
+    @Step("Проверка на Лондон")
+    public void londonText() {
+        assertTrue(homePage.londonText().contains("Лондон"));
+        System.out.println("попап Лондон");
+    }
+
+    @Step("Проверка на Париж")
+    public void parisText() {
+        assertTrue(homePage.parisText().contains("Париж"));
+        System.out.println("попап Париж");
     }
 
     @Step
     public void open() {
         BaseTest.getDriver().get("https://yandex.by/");
     }
-
-
 }
-
